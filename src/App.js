@@ -10,7 +10,7 @@ function genSudoku() {
     const row = { cols: [], index: i }
     for (let j = 0; j < 9; j++) {
       const val = raw[i * 9 + j]
-      const col = { row: i, col: j, val: val, readonly: val !== null };
+      const col = { row: i, col: j, value: val, readonly: val !== null };
       row.cols.push(col);
     }
     res.rows.push(row);
