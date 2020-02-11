@@ -21,7 +21,19 @@
 .App-link {
   color: #61dafb;
 }
-
+.field{
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #888;
+}
+.field[read-only]{
+  color: #222222;
+}
+#board {
+  padding: 2rem;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
