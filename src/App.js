@@ -1,47 +1,36 @@
 import React, { Component } from "react"
-import logo from "./logo.svg"
+import generator from "sudoku"
+import SudokuBoard from "./components/SudokuBoard"
 import "./App.css"
 
-class LambdaDemo extends Component {
+function genSudoku() {
+  const raw = generator.makepuzzle()
+  const res = { rows: [] }
+  for (let i = 0; i < 9; i++) {
+    const row = { cols: [], index: i }
+    for (let j = 0; j < 9; j++) {
+      const val = raw[i * 9 + j]
+      const col = { row: i, col: j, val: val, readonly: val !== null };
+      row.cols.push(col);
+    }
+    res.rows.push(row);
+  }
+  return res;
+}
+class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { loading: false, msg: null }
+    this.state = {
+      sudoku: genSudoku()
+    }
   }
-
-  handleClick = api => e => {
-    e.preventDefault()
-
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
-
-  render() {
-    const { loading, msg } = this.state
-
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
-}
-
-class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
+          <h1>Sudoku Test</h1>
         </header>
+        <SudokuBoard sudoku={this.state.sudoku} />
       </div>
     )
   }
