@@ -18,18 +18,42 @@
   color: white;
 }
 
+nav ul {
+  list-style: none;
+}
+.crossword {
+  list-style: none;
+}
+.clue {
+  list-style: none;
+}
 .App-link {
   color: #61dafb;
 }
-.field{
+.field {
   width: 3rem;
   height: 3rem;
   font-size: 2rem;
   text-align: center;
-  color: #888;
+  border-color: black;
+  border-width: thin;
 }
-.field[read-only]{
+.field[read-only] {
   color: #222222;
+}
+/* border work to get the board looking correct */
+.field:nth-child(3),
+.field:nth-child(6) {
+  border-right-width: thick;
+}
+#board .row:nth-child(3),
+#board .row:nth-child(6) {
+  border-bottom-width: thick;
+  border-color: black;
+  border-style: solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
 }
 #board {
   padding: 2rem;
